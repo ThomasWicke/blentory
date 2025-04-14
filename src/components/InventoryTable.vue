@@ -2,6 +2,7 @@
     <table class="min-w-full table-auto border border-gray-700 text-left">
       <thead class="bg-gray-900 text-gray-200">
         <tr>
+          <th class="border px-4 py-2">#</th>
           <th class="border px-4 py-2">Name</th>
           <th class="border px-4 py-2">Amount</th>
           <th class="border px-4 py-2">Price</th>
@@ -11,7 +12,8 @@
         </tr>
       </thead>
       <tbody class="bg-gray-800 text-white">
-        <tr v-for="item in inventory" :key="item.id" class="hover:bg-gray-700">
+        <tr v-for="(item, index) in inventory" :key="item.id" class="hover:bg-gray-700">
+          <td class="border px-4 py-2">{{ index + 1 }}</td>
           <td class="border px-4 py-2">{{ item.name }}</td>
           <td class="border px-4 py-2">{{ item.amount }}</td>
           <td class="border px-4 py-2">${{ item.purchasing_price }}</td>
