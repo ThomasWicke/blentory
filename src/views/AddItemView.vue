@@ -5,15 +5,22 @@
       <form @submit.prevent="handleSubmit" class="grid gap-4">
         <input v-model="item.name" placeholder="Name" class="p-2 bg-gray-700 text-white rounded" required />
         <input v-model.number="item.amount" type="number" placeholder="Amount" class="p-2 bg-gray-700 text-white rounded" required />
-        <input v-model.number="item.purchasing_price" type="number" placeholder="Purchasing Price" class="p-2 bg-gray-700 text-white rounded" required />
+        <input v-model.number="item.price_per_day" type="number" placeholder="Purchasing Price" class="p-2 bg-gray-700 text-white rounded" required />
         <input v-model="item.category" placeholder="Category" class="p-2 bg-gray-700 text-white rounded" required />
         <input v-model="item.status" placeholder="Status" class="p-2 bg-gray-700 text-white rounded" required />
   
+        <div class="flex gap-4">
         <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500">
           Save Item
         </button>
-  
-        <p v-if="message" class="text-green-400">{{ message }}</p>
+
+        <button @click="handleSubmitAndContinue" type="button" class="border border-gray-500 text-gray-300 px-4 py-2 rounded hover:bg-gray-700">
+          Save and add more
+        </button>
+        </div>
+
+        <p v-if="message" class="text-green-400 mt-2">{{ message }}</p>
+
       </form>
     </div>
   </template>
@@ -29,7 +36,7 @@
   const item = ref({
     name: '',
     amount: '',
-    purchasing_price: '',
+    price_per_day: '',
     category: '',
     status: ''
   })
@@ -46,5 +53,23 @@
       }, 1000)
     }
   }
+  async function handleSubmitAndContinue() {
+  const { error } = await supabase.from('inventory').insert([item.value])
+  if (error) {
+    console.error('Error adding item:', error.message)
+    message.value = 'Failed to add item.'
+  } else {
+    message.value = 'Item saved. You can add another!'
+    // Reset form
+    item.value = {
+      name: '',
+      amount: '',
+      price_per_day: '',
+      category: '',
+      status: ''
+    }
+  }
+}
+
   </script>
   
