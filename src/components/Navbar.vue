@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-gray-900 text-white px-4 py-3 flex justify-between items-center">
+  <nav class="bg-gray-900 text-white px-4 py-1 flex justify-between items-center">
     <RouterLink to="/" class="font-bold text-lg" style="color: #FFFFFF; text-decoration: none;">Blentory</RouterLink>
     <div class="flex items-center gap-6">
       <template v-if="!auth.user">

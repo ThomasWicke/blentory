@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="auth.user">
+    <div v-if="auth.user" >
       <InventoryTable :isAdmin="auth.role === 'admin'" />
     </div>
     <div v-else class="text-center mt-20 text-gray-400 text-lg">

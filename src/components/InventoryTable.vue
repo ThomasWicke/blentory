@@ -1,31 +1,35 @@
 <template>
-    <table class="min-w-full table-auto border border-gray-700 text-left">
-      <thead class="bg-gray-900 text-gray-200">
-        <tr>
-          <th class="border px-4 py-2">#</th>
-          <th class="border px-4 py-2">Name</th>
-          <th class="border px-4 py-2">Amount</th>
-          <th class="border px-4 py-2">Price</th>
-          <th class="border px-4 py-2">Category</th>
-          <th class="border px-4 py-2">Status</th>
-          <th v-if="isAdmin" class="border px-4 py-2">Actions</th>
-        </tr>
-      </thead>
-      <tbody class="bg-gray-800 text-white">
-        <tr v-for="(item, index) in inventory" :key="item.id" class="hover:bg-gray-700">
-          <td class="border px-4 py-2">{{ index + 1 }}</td>
-          <td class="border px-4 py-2">{{ item.name }}</td>
-          <td class="border px-4 py-2">{{ item.amount }}</td>
-          <td class="border px-4 py-2">${{ item.purchasing_price }}</td>
-          <td class="border px-4 py-2">{{ item.category }}</td>
-          <td class="border px-4 py-2">{{ item.status }}</td>
-          <td v-if="isAdmin" class="border px-4 py-2 space-x-2">
-            <button @click="startEdit(item)" class="text-yellow-400 hover:underline">Edit</button>
-            <button @click="deleteItem(item.id)" class="text-red-400 hover:underline">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="w-full h-[calc(100vh-40px)] overflow-y-auto">
+        <table class="min-w-full table-fixed">
+            <thead class="sticky top-0 bg-gray-700 text-gray-200 z-10">
+            <tr>
+                <th class="px-4 py-2">#</th>
+                <th class="px-4 py-2">Name</th>
+                <th class="px-4 py-2">Amount</th>
+                <th class="px-4 py-2">Price</th>
+                <th class="px-4 py-2">Category</th>
+                <th class="px-4 py-2">Status</th>
+                <th v-if="isAdmin" class="px-4 py-2">Actions</th>
+            </tr>
+            </thead>
+            <tbody class="bg-gray-800 text-white">
+            <tr v-for="(item, index) in inventory" :key="item.id" class="hover:bg-gray-700">
+                <td class="px-4 py-2">{{ index + 1 }}</td>
+                <td class="px-4 py-2">{{ item.name }}</td>
+                <td class="px-4 py-2">{{ item.amount }}</td>
+                <td class="px-4 py-2">€{{ item.purchasing_price }}</td>
+                <td class="px-4 py-2">{{ item.category }}</td>
+                <td class="px-4 py-2">{{ item.status }}</td>
+                <td v-if="props.isAdmin" class="px-4 py-2">
+                    <button class="text-yellow-400 hover:underline mr-2">Edit</button>
+                    <button class="text-red-400 hover:underline">Delete</button>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
   
     <!-- Optional: Simple Edit Inline -->
     <div v-if="editing" class="mt-6 p-4 bg-gray-800 rounded">
