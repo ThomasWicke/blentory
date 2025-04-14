@@ -1,11 +1,8 @@
 <template>
   <div>
-    <h1 class="text-2xl font-semibold mb-4">Inventory</h1>
-
     <div v-if="auth.user">
       <InventoryTable :isAdmin="auth.role === 'admin'" />
     </div>
-
     <div v-else class="text-center mt-20 text-gray-400 text-lg">
       Please log in to access the inventory 📦
     </div>
